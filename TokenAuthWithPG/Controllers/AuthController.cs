@@ -38,12 +38,13 @@ namespace TokenAuthWithPG.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Sid, user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };
 
                 var userRoles = await _userManager.GetRolesAsync(user);
                 claims.AddRange(userRoles.Select(role => new Claim(ClaimsIdentity.DefaultRoleClaimType, role)));
-               
+
 
                 //var claims = new[]
                 //{
@@ -51,8 +52,10 @@ namespace TokenAuthWithPG.Controllers
                 //    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 //};
 
-                
-                var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MySuperSecurityKey"));
+
+                //var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MySuperSecurityKey"));
+                byte[] test = Encoding.UTF8.GetBytes("MySuperSecurityKey");
+                var signinKey = new SymmetricSecurityKey(test);
                 var token = new JwtSecurityToken(
                     issuer:"faysal",
                     audience: "audience",

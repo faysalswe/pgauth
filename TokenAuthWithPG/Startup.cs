@@ -62,6 +62,7 @@ namespace TokenAuthWithPG
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MySuperSecurityKey"))
                     
                 };
+                
             });
 
 
