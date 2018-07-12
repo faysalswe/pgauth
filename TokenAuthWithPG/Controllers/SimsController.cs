@@ -25,7 +25,7 @@ namespace TokenAuthWithPG.Controllers
         [HttpGet]
         public IEnumerable<Sim> GetSim()
         {
-            return _context.Sim;
+            return _context.Sims;
         }
 
         // GET: api/Sims/5
@@ -37,7 +37,7 @@ namespace TokenAuthWithPG.Controllers
                 return BadRequest(ModelState);
             }
 
-            var sim = await _context.Sim.SingleOrDefaultAsync(m => m.Number == id);
+            var sim = await _context.Sims.SingleOrDefaultAsync(m => m.Number == id);
 
             if (sim == null)
             {
@@ -92,7 +92,7 @@ namespace TokenAuthWithPG.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.Sim.Add(sim);
+            _context.Sims.Add(sim);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetSim", new { id = sim.Number }, sim);
@@ -107,13 +107,13 @@ namespace TokenAuthWithPG.Controllers
                 return BadRequest(ModelState);
             }
 
-            var sim = await _context.Sim.SingleOrDefaultAsync(m => m.Number == id);
+            var sim = await _context.Sims.SingleOrDefaultAsync(m => m.Number == id);
             if (sim == null)
             {
                 return NotFound();
             }
 
-            _context.Sim.Remove(sim);
+            _context.Sims.Remove(sim);
             await _context.SaveChangesAsync();
 
             return Ok(sim);
@@ -121,7 +121,7 @@ namespace TokenAuthWithPG.Controllers
 
         private bool SimExists(string id)
         {
-            return _context.Sim.Any(e => e.Number == id);
+            return _context.Sims.Any(e => e.Number == id);
         }
     }
 }

@@ -19,9 +19,47 @@ namespace TokenAuthWithPG.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<string> Get()
+        public object Get()
         {
-            return new string[]{ "El Chapo","Escobar"};
+            List<Visitor> lstvisitor = new List<Visitor>
+            {
+                new Visitor{ VisitorID =8111,  Mobile = "1111199999", Name = "Faysal"},
+                new Visitor{ VisitorID =8222,  Mobile = "3333377777", Name = "Abid"},
+                new Visitor{ VisitorID =8333,  Mobile = "3333377777", Name = "Abid"}
+            };
+
+            List<Entry> lstentry = new List<Entry>
+            {
+                new Entry { EntryID = 1111, EntryTime= DateTime.Now , VisitorID = 8111, Visitee = "Einstine"},
+                new Entry { EntryID = 2222, EntryTime= DateTime.Now , VisitorID = 8222, Visitee ="karl Sagan"},
+                new Entry { EntryID = 3333, EntryTime= DateTime.Now , VisitorID = 8333, Visitee = "Remi Malek"},
+                new Entry { EntryID = 4444, EntryTime= DateTime.Now , VisitorID = 8111, Visitee = "Enistine"},
+                new Entry { EntryID = 5555, EntryTime= DateTime.Now , VisitorID = 8222, Visitee ="Karl Sagan"}
+            };
+
+            List<Exit> lstexit = new List<Exit>
+            {
+                new Exit{ ExitID =9111, EntryID= 1111 , ExitTime =DateTime.Now, ExitNote ="1111 id exited"  },
+                new Exit{ ExitID =9222, EntryID= 2222 , ExitTime =DateTime.Now, ExitNote ="1111 id exited"  },
+                new Exit{ ExitID =9333, EntryID= 3333 , ExitTime =DateTime.Now, ExitNote ="1111 id exited"  }
+            };
+            var result = from entry in lstentry
+                         join visitor in lstvisitor
+                         on entry.VisitorID equals visitor.VisitorID
+                         join exit in lstexit on
+                         entry.EntryID equals exit.EntryID
+                         into ps
+                         select new
+                         {
+                             entryId = entry.EntryID,
+                             name = visitor.Name,
+                             mobile = visitor.Mobile,
+                             visitee = entry.Visitee,
+                             entrytime = entry.EntryTime,
+                             exit = ps
+                         };
+
+            return result;
         }
 
         [HttpGet]
