@@ -68,8 +68,8 @@ namespace TokenAuthWithPG.Controllers
         public IEnumerable<string> GetUser ()
         {
             return _context.Users.Select(u => u.UserName).ToArray();
-            //return new string[]{ "El Chapo","Escobar"};
         }
+        
         [Authorize(Roles = "Visitor")]
         [HttpGet("{id}")]
         public string Get(int id)
@@ -93,6 +93,12 @@ namespace TokenAuthWithPG.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+        
+        [HttpPost("{id})]
+        public void Test(int id){
+        {
+        
         }
     }
 }
