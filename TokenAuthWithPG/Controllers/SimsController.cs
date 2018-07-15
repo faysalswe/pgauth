@@ -20,5 +20,10 @@ namespace TokenAuthWithPG.Controllers
         {
             _context = context;
         }
+
+        public void Test()
+        {
+            string test = "Test";
+        }
     }
 }
