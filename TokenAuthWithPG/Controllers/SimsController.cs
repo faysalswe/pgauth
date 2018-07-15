@@ -25,5 +25,30 @@ namespace TokenAuthWithPG.Controllers
         {
             string test = "Test";
         }
+
+        public void Test4()
+        {
+            string test = "Test";
+        }
+
+        public void Test5()
+        {
+            string test = "Test";
+        }
+
+        public void Test6()
+        {
+            string test = "Test";
+        }
+
+        public void Test7()
+        {
+            string test = "Test";
+        }
+
+        public void Test8()
+        {
+            string test = "Test";
+        }
     }
 }
