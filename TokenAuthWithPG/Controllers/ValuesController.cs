@@ -95,10 +95,5 @@ namespace TokenAuthWithPG.Controllers
         {
         }
         
-        [HttpPost("{id})]
-        public void Test(int id){
-        {
-        
-        }
     }
 }
